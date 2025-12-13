@@ -5,30 +5,44 @@ const userSchema = new mongoose.Schema(
     firstName : {
     type:String,
     required :true,
-    unique:true,
     minlength : 2,
-    maxlength:20
+    maxlength:20,
+    trim:true
   },
   lastName:{
     type:String,
       required :true,
+      trim:true,
   },
   emailId:{
     type:String,
       required :true,
       lowercase:true,
       unique :true,
+      trimp:true,
+      validate(value){
+       if(!validator.isEmail(value)){
+        throw new Error("invalid email format")
+       }  
+      }
   },
   password:{
     type:String,
       required :true,
+      trim:true,
       minlength : 9,
-    maxlength:50
+    maxlength:50,
+    validate(value){
+ if(!validator.isStrongPassword(value)){
+  throw new Error("password is not strong enough")
+ }
+    }
   },
   age:{
     type:Number,
     min:1,
-    max:120
+    max:120,
+    trim:true
   },
   gender:{
     type:String,
@@ -47,11 +61,18 @@ const userSchema = new mongoose.Schema(
     type:String,
     default:"this is deafult about for user",
     maxlength:250,
+    trim:true
     
   },
   image:{
     type:String,
-    default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbTu4diIJv94P-8WTWuUSn3zhn5oU5flJmQA&s"
+    default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbTu4diIJv94P-8WTWuUSn3zhn5oU5flJmQA&s",
+    trim:true,
+    validate(value){
+      if(!validator.isURL(value)){
+        throw new Error ("invalid url format for image")
+      }
+    }
  
   }
 },
