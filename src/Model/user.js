@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 const userSchema = new mongoose.Schema(
   {
@@ -6,7 +7,7 @@ const userSchema = new mongoose.Schema(
     type:String,
     required :true,
     minlength : 2,
-    maxlength:20,
+    maxlength:50,
     trim:true
   },
   lastName:{
@@ -19,7 +20,7 @@ const userSchema = new mongoose.Schema(
       required :true,
       lowercase:true,
       unique :true,
-      trimp:true,
+      trim:true,
       validate(value){
        if(!validator.isEmail(value)){
         throw new Error("invalid email format")
@@ -31,7 +32,7 @@ const userSchema = new mongoose.Schema(
       required :true,
       trim:true,
       minlength : 9,
-    maxlength:50,
+    maxlength:100,
     validate(value){
  if(!validator.isStrongPassword(value)){
   throw new Error("password is not strong enough")
