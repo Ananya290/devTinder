@@ -37,12 +37,12 @@ app.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).json("user not found");
     }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await user.verifyPassword(password);
     if (!isPasswordValid) {
       return res.status(401).json("Invalid credentials");
     }
-    const token = await jwt.sign({ _id: user._id }, "DevTinder@1945");
-    res.cookie("token", token);
+    const token = await user.getJWTToken();
+    res.cookie("token", token, { expires: new Date(Date.now() + 1000000000) });
     res.status(200).json("Login successful");
   } catch (err) {
     res.status(500).json("Login failed: " + err.message);
@@ -58,18 +58,16 @@ app.get("/profile",userAuth, async (req, res) => {
   }
 });
 
-// app.get("/getApi", async (req, res) => {
-//   const useremail = req.body.emailId;
-//   console.log(useremail);
+app.post("/sendConnectionRequest", userAuth, async (req,res)=>{
+  const user = req.user
 
-//   const user = await User.find({ emailId: useremail });
-//   if (user.length === 0) {
-//     res.status(404).send("User not found");
-//   }
-//   {
-//     res.send(user);
-//   }
-// });
+
+ 
+  res.send(user.firstName +" Connection Request send")
+}
+)
+
+
 
 connectDB()
   .then(() => {

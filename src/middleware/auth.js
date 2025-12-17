@@ -8,7 +8,7 @@ const userAuth = async (req,res,next)=>{
     if(!token){
         throw new Error("Invalid token")
     }
-    const jwtDecoded = await jwt.verify(token,"DevTinder@1945")
+    const jwtDecoded = jwt.verify(token,"DevTinder@1945")
     const { _id }  = jwtDecoded;
 
     const user = await User.findById(_id);
@@ -23,7 +23,7 @@ const userAuth = async (req,res,next)=>{
 
     }
     catch(err){
-        res.status(400).send("Error", err.message);
+        res.status(400).send("Error hai kuch", err.message);
     }
 
 
