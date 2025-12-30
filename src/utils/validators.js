@@ -24,4 +24,15 @@ else if(!validator.isStrongPassword(password,{
 }
 }
 
-module.exports={ValidatorSignup}
+const ValidateAllowedFeildData = (req)=>{
+    const allowedFeilds = ["firstName","lastName","age","gender","skills","about"];
+
+    const isEditAllowed = Object.keys(req.body).every((field)=>
+    allowedFeilds.includes(field));
+
+    return isEditAllowed;
+}
+module.exports={
+    ValidatorSignup,
+    ValidateAllowedFeildData
+}
