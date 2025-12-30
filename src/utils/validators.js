@@ -32,7 +32,18 @@ const ValidateAllowedFeildData = (req)=>{
 
     return isEditAllowed;
 }
+const ValidatePassordChangeData = (req)=>{
+    const allowedFeilds = ["oldpassword","newPassword"];
+
+    const isChangeAllowed = Object.keys(req.body).every((field)=>
+    allowedFeilds.includes(field));
+
+    return isChangeAllowed;
+
+}
+  
 module.exports={
     ValidatorSignup,
-    ValidateAllowedFeildData
+    ValidateAllowedFeildData,
+    ValidatePassordChangeData
 }
