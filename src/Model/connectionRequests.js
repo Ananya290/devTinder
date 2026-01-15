@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const User = require('./user');
 
 const UserConnectionSchema = new mongoose.Schema({
 
@@ -24,6 +25,7 @@ const UserConnectionSchema = new mongoose.Schema({
     timestamps:true
 });
 
+UserConnectionSchema.index({ fromUserId: 1, toUserId: 1 }, { unique: true });
 UserConnectionSchema.pre('save', async function (next) {
     const connectionRequest = this;
     if (connectionRequest.fromUserId.toString() === connectionRequest.toUserId.toString()) {

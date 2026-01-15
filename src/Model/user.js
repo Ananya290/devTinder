@@ -94,7 +94,7 @@ userSchema.methods.verifyPassword = async function(password){
   return isPasswordValid;
   
 }
-
+userSchema.index({ emailId: 1 });
 const User = mongoose.model("User",userSchema)
 
 module.exports = User;
