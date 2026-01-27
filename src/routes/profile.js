@@ -13,7 +13,7 @@ profileAuth.get("/profile/view", userAuth, async (req, res) => {
     const user = req.user;
     res.send(user);
   } catch (err) {
-    res.send("Error");
+    res.send("Error: Can't see profile");
   }
 });
 
