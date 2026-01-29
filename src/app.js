@@ -6,9 +6,13 @@ const User = require("./Model/user");
 const cookieparser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 // const { userAuth } = require("./middleware/auth")
+const cors = require("cors");
 
 const app = express();
-
+app.use(cors({
+  credentials: true,
+  origin: "http://localhost:4200"
+}));
 app.use(express.json());
 app.use(cookieparser());
 
