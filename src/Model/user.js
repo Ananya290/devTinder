@@ -69,7 +69,7 @@ const userSchema = new mongoose.Schema(
   },
   image:{
     type:String,
-    default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbTu4diIJv94P-8WTWuUSn3zhn5oU5flJmQA&s",
+    // default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbTu4diIJv94P-8WTWuUSn3zhn5oU5flJmQA&s",
     trim:true,
     validate(value){
       if(!validator.isURL(value)){

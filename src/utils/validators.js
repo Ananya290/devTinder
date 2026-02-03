@@ -25,7 +25,7 @@ else if(!validator.isStrongPassword(password,{
 }
 
 const ValidateAllowedFeildData = (req)=>{
-    const allowedFeilds = ["firstName","lastName","age","gender","skills","about"];
+    const allowedFeilds = ["firstName","lastName","age","gender","skills","about","image"];
 
     const isEditAllowed = Object.keys(req.body).every((field)=>
     allowedFeilds.includes(field));
