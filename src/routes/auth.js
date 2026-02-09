@@ -10,7 +10,7 @@ const authRouter = express.Router();
 authRouter.post("/signUp", async (req, res) => {
   try {
     ValidatorSignup(req); //validation function call ye jaruri hai don't accept invalid data
-    const { firstName, lastName, emailId, password } = req.body;
+    const { firstName, lastName, emailId, password , age, gender, skills, about, image } = req.body;
     const passwordHash = await bcrypt.hash(password, 10);
     console.log(passwordHash);
     const userObj = new User({
@@ -18,6 +18,12 @@ authRouter.post("/signUp", async (req, res) => {
       lastName,
       emailId,
       password: passwordHash,
+       age,
+  gender,
+  skills,
+  about,
+  image
+      
     });
     await userObj.save();
     res.status(201).json({ message: "user signed up successfully" });
@@ -39,6 +45,8 @@ authRouter.post("/login", async (req, res) => {
     }
     const token = await user.getJWTToken();
     res.cookie("token", token, { expires: new Date(Date.now() + 1000000000) });
+        console.log(user)
+
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json("Login failed: " + err.message);

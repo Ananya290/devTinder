@@ -4,7 +4,7 @@ const connectionRequestModel = require("../Model/connectionRequests");
 const { userAuth } = require("../middleware/auth");
 const User = require("../Model/user");
 
-const USER_SAFE_FIELDS = ["firstName", "lastName", "emailId"];
+const USER_SAFE_FIELDS = ["firstName", "lastName", "emailId", "age" , "about" , "gender", "image"];
 
 UserRouter.get("/user/request/recieved", userAuth, async (req, res) => {
   try {
